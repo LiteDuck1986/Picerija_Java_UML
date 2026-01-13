@@ -6,7 +6,7 @@ public class Pasutitajs {
 
 	// 		================ ATRIBŪTI ================
 	
-			private String PasutitajaVards, adrese, talrunis, piedevas, merces;
+			private String PasutitajaVards, adrese, talrunis, piedevas, nosaukums;
 			private boolean UzVietas;
 			private double cena;
 			private int PLielums, PasutijumaID;
@@ -15,7 +15,7 @@ public class Pasutitajs {
 			// ========== KONSTRUKTORS ==========
 			
 			public Pasutitajs(int PLielums, int PasutijumaID, double cena, boolean UzVietas, String PasutitajaVards, String adrese, String talrunis,
-					String piedevas, String merces) {
+					String piedevas, String nosaukums) {
 				this.PLielums = PLielums;
 				this.PasutijumaID = PasutijumaID;
 				this.cena = cena;
@@ -24,7 +24,7 @@ public class Pasutitajs {
 				this.adrese = adrese;
 				this.talrunis = talrunis;
 				this.piedevas = piedevas;
-				this.merces = merces;
+				this.nosaukums = nosaukums;
 			}
 			
 			//=============== GETTER METODES ==================
@@ -61,8 +61,8 @@ public class Pasutitajs {
 				return piedevas;
 			}
 			
-			public String getMerces() {
-				return merces;
+			public String getNosaukums() {
+				return nosaukums;
 			}
 			
 			
@@ -101,7 +101,7 @@ public class Pasutitajs {
 				this.piedevas = piedevas;
 			}
 			
-			public void setMerces(String merces) {
-				this.merces = merces;
+			public void setNosaukums(String nosaukums) {
+				this.nosaukums = nosaukums;
 			}
 }

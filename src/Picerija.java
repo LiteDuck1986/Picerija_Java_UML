@@ -26,19 +26,21 @@ public class Picerija {
 	static JPanel galvenaisPanel;
 	
 	// JTextField
-    static JTextField t, PVards, talrunis, adrese;
+    static JTextField PasutijumaCENA, PVards, talrunis, adrese;
     
     // JCheckBox
-    static JCheckBox S, M, XL, senes, ananas, pepperoni, merce, UzVietas;
+    static JCheckBox S, M, XL, senes, ananas, pepperoni, merce, UzVietasJA, UzVietasNE;
     
     // labels
-    static JLabel izmersLabel, piedevasLabel;
+    static JLabel izmersLabel, piedevasLabel, UzVietasLabel;
     
     
     
     // picas static mainīgie ko izmantoja priekš pasūtijuma izveides
-    static int PicasIzmers = 10;
+    static int PicasIzmers = 10, n = 0;
     static String PicasPiedevas = "";
+    static boolean UzVietas = true;
+    static double PicasCena;
     
     // Krāsas izveide priekš programmas fona
     public final static Color sarkansTums = new Color(160, 5, 0);
@@ -48,7 +50,7 @@ public class Picerija {
 	public static void main(String[] args) {
 
 		frame = new JFrame("Picerijas pasūtijuma programma");
-        frame.setSize(800, 600);
+        frame.setSize(1000, 800);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
@@ -107,11 +109,17 @@ public class Picerija {
         PievienotPasutijumu.setBounds(300, 400, 160, 20);
         
         // JTextFieldsss
-        t = new JTextField("67", 16);
-        t.setBounds(300, 350, 160, 20);
+        PasutijumaCENA = new JTextField("0", 16);
+        PasutijumaCENA.setBounds(400, 500, 160, 20);
         
         PVards = new JTextField("Jānis", 16);
-        PVards.setBounds(300, 325, 160, 20);
+        PVards.setBounds(400, 100, 160, 20);
+        
+        adrese = new JTextField("Liepāja, Ventpils iela 51, LV-6769", 16);
+        adrese.setBounds(300, 325, 160, 20);
+        
+        talrunis = new JTextField("+371 23 676 676", 16);
+        talrunis.setBounds(300, 325, 160, 20);
         
         // JCheckBox (Picas izmērs)
         S = new JCheckBox("10");
@@ -157,22 +165,45 @@ public class Picerija {
         piedevasLabel.setForeground(Color.WHITE);
         
         
-        PasutijumaIzveidePanel.add(t);
+        
+        // Uz vietas check box
+        UzVietasJA = new JCheckBox("Jā");
+        UzVietasJA.setBounds(250, 100, 65, 20);
+        UzVietasJA.setForeground(Color.WHITE);
+        UzVietasJA.setOpaque(false);
+        
+        UzVietasNE = new JCheckBox("Nē");
+        UzVietasNE.setBounds(315, 100, 90, 20);
+        UzVietasNE.setForeground(Color.WHITE);
+        UzVietasNE.setOpaque(false);
+        
+        // labels
+        UzVietasLabel = new JLabel("Pasūtijumu savāks uz vietas?:");
+        UzVietasLabel.setBounds(250, 75, 160, 20);
+        UzVietasLabel.setForeground(Color.WHITE);
+        
+        
+        PasutijumaIzveidePanel.add(PasutijumaCENA);
+        PasutijumaIzveidePanel.add(PVards);
+        PasutijumaIzveidePanel.add(adrese);
+        PasutijumaIzveidePanel.add(talrunis);
         PasutijumaIzveidePanel.add(PievienotPasutijumu);
         PasutijumaIzveidePanel.add(izmersLabel);
         PasutijumaIzveidePanel.add(piedevasLabel);
+        PasutijumaIzveidePanel.add(UzVietasLabel);
         PasutijumaIzveidePanel.add(S);
         PasutijumaIzveidePanel.add(M);
         PasutijumaIzveidePanel.add(XL);
         PasutijumaIzveidePanel.add(senes);
         PasutijumaIzveidePanel.add(pepperoni);
         PasutijumaIzveidePanel.add(ananas);
+        PasutijumaIzveidePanel.add(UzVietasJA);
+        PasutijumaIzveidePanel.add(UzVietasNE);
         
         frame.add(galvenaisPanel);
         frame.setVisible(true);
         
-        
-        
+
         
         ArrayList<Pasutitajs> Pasutitaji = new ArrayList<>();
         
@@ -181,17 +212,38 @@ public class Picerija {
         
         // ActionListeners  =================================================================================================
         PievienotPasutijumu.addActionListener(e -> {
-
+        	
+        	// Palielina ID numuru par 1
+        	n++;
+        	
+        	// Pasūtijumi ID sākas ar 67.
+        	int PasutijumaID = 66+n;
+        	
         	int izmers = PicasIzmers;
+        	boolean uzVietas = UzVietas;
         	
         	String piedeva = PicasPiedevas;
         	
-        	Pasutitajs pasutijums = new Pasutitajs(izmers, 1, 1.00, true, "yes", "yes", "yes", piedeva, "yes");
+        	String nosaukums = piedeva+" Pica ("+izmers+")";
+        	
+        	
+        	double cena = picasCena(izmers, UzVietas, piedeva);
+        	
+        	Pasutitajs pasutijums = new Pasutitajs(izmers, PasutijumaID, cena, uzVietas, "yes", "yes", "yes", piedeva, nosaukums);
         	Pasutitaji.add(pasutijums);
         	
-            izmersLabel.setText(t.getText());
+        	// Debug prints
+            System.out.println("=====================================");
+            System.out.println("        Pasūtijuma čeks\n");
+            System.out.println("Pasūtijuma numurs: " + PasutijumaID);
+            System.out.println("Picas izmērs: " + izmers);
+            System.out.println("Picas saņem uz vietas?: " + uzVietas);
+            System.out.println("Picas kopēja cena: " + cena);
+            System.out.println("\n=====================================\n\n\n");
+        	
+            izmersLabel.setText(PasutijumaCENA.getText());
 
-            t.setText(t.getText());
+            PasutijumaCENA.setText(PasutijumaCENA.getText());
         	
         });
         
@@ -262,15 +314,36 @@ public class Picerija {
                 PicasPiedevas = "Ananāss";
             }
 
-            // Ja lietotājs visu ir uncheckojis tad Picas piedevums būs...
+            // Ja lietotājs visu ir uncheckojis tad Picas piedevums būs Pepperoni
             if (!senes.isSelected() && !pepperoni.isSelected() && !ananas.isSelected()) {
             	PicasPiedevas = "Pepperoni";
             }
             
             
+            
+            // Picas Uz vietas sadaļa ====================================================
+            if (izveletais == UzVietasJA && UzVietasJA.isSelected()) {
+            	UzVietasNE.setSelected(false);
+                UzVietas = true;
+            }
+            if (izveletais == UzVietasNE && UzVietasNE.isSelected()) {
+            	UzVietasJA.setSelected(false);
+                UzVietas = false;
+            }
+
+            // Ja lietotājs visu ir uncheckojis tad boolean uz vietas būs jā
+            if (!UzVietasJA.isSelected() && !UzVietasNE.isSelected()) {
+            	UzVietas = true;
+            }
+            
+            
             // Debug prints
+            System.out.println("=====================================");
+            System.out.println("       Check Box debug logs\n");
             System.out.println("Picas izmērs: " + PicasIzmers);
             System.out.println("Picas piedeva: " + PicasPiedevas);
+            System.out.println("Pasūtijumu savāks uz vietas?: " + UzVietas);
+            System.out.println("\n=====================================\n\n\n\n");
         };
 
         S.addActionListener(klausitajs);
@@ -281,8 +354,46 @@ public class Picerija {
         pepperoni.addActionListener(klausitajs);
         ananas.addActionListener(klausitajs);
         
+        UzVietasJA.addActionListener(klausitajs);
+        UzVietasNE.addActionListener(klausitajs);
+        
 	}
 
-	
+	public static double picasCena(int izmers, boolean uzVietas, String piedeva) {
+		// Katru reizi kad izsauc šo metodi uzliekam cenu uz 0.00
+		PicasCena = 0.00;
+		
+		// izmēra cena
+		if (izmers == 10)
+			PicasCena += 3.50;
+		
+		if (izmers == 15)
+			PicasCena += 5.50;
+		
+		if (izmers == 20)
+			PicasCena += 7.00;
+			
+		
+		// piedevas cena
+		if (piedeva == "Sēnes")
+			PicasCena += 1.80;
+		
+		if (piedeva == "Pepperoni")
+			PicasCena += 2.50;
+		
+		if (piedeva == "Ananāss")
+			PicasCena += 2.00;
+		
+		
+		// Uz vietas cena
+		if (uzVietas == true)
+			PicasCena += 0.00;
+				
+		if (!uzVietas)
+			PicasCena += 3.20;
+				
+			
+		return PicasCena;
+	}
 
 }
