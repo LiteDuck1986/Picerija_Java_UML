@@ -41,6 +41,7 @@ public class Picerija {
     static String PicasPiedevas = "";
     static boolean UzVietas = true;
     static double PicasCena;
+    static int ID = 67;
     
     // Krāsas izveide priekš programmas fona
     public final static Color sarkansTums = new Color(160, 5, 0);
@@ -106,7 +107,25 @@ public class Picerija {
         
         
         JButton PievienotPasutijumu = new JButton("Pievienot");
+        PievienotPasutijumu.setBackground(Color.RED);
+        PievienotPasutijumu.setForeground(Color.WHITE);
+        PievienotPasutijumu.setBorderPainted(true);
+        PievienotPasutijumu.setFocusPainted(false);
         PievienotPasutijumu.setBounds(400, 550, 150, 30);
+        
+        JButton AtjaunotPoga = new JButton("Atjaunot");
+        AtjaunotPoga.setBackground(Color.RED);
+        AtjaunotPoga.setForeground(Color.WHITE);
+        AtjaunotPoga.setBorderPainted(true);
+        AtjaunotPoga.setFocusPainted(false);
+        AtjaunotPoga.setBounds(500, 550, 150, 30);
+        
+        JButton atiestatitPoga = new JButton("Atiestatīt");
+        atiestatitPoga.setBackground(Color.RED);
+        atiestatitPoga.setForeground(Color.WHITE);
+        atiestatitPoga.setBorderPainted(true);
+        atiestatitPoga.setFocusPainted(false);
+        atiestatitPoga.setBounds(600, 550, 150, 30);
         
         // JTextFieldsss
         PasutijumaCENA = new JTextField("$0", 16);
@@ -121,7 +140,7 @@ public class Picerija {
         talrunis = new JTextField("+371 23 676 676", 16);
         talrunis.setBounds(400, 150, 160, 20);
         
-        IDField = new JTextField("67", 16);
+        IDField = new JTextField(""+ID);
         IDField.setBounds(400, 250, 160, 20);
         
         picasNosaukums = new JTextField("Pepperoni pica (15)", 16);
@@ -218,6 +237,8 @@ public class Picerija {
         PasutijumaIzveidePanel.add(adrese);
         PasutijumaIzveidePanel.add(talrunis);
         PasutijumaIzveidePanel.add(PievienotPasutijumu);
+        PasutijumaIzveidePanel.add(atiestatitPoga);
+        PasutijumaIzveidePanel.add(AtjaunotPoga);
         PasutijumaIzveidePanel.add(izmersLabel);
         PasutijumaIzveidePanel.add(piedevasLabel);
         PasutijumaIzveidePanel.add(UzVietasLabel);
@@ -255,7 +276,7 @@ public class Picerija {
         	n++;
         	
         	// Pasūtijumi ID sākas ar 67.
-        	int PasutijumaID = 66+n;
+        	int PasutijumaID = ID+n;
         	
         	int izmers = PicasIzmers;
         	boolean uzVietas = UzVietas;
@@ -283,9 +304,35 @@ public class Picerija {
             System.out.println("Picas kopēja cena: " + cena);
             System.out.println("\n=====================================\n\n\n");
         	
-            izmersLabel.setText(PasutijumaCENA.getText());
+//            izmersLabel.setText(PasutijumaCENA.getText());
 
             PasutijumaCENA.setText("$"+cena);
+        	
+        });
+        
+        AtjaunotPoga.addActionListener(e -> {
+        	picasNosaukums.setText(PicasPiedevas+" Pica ("+PicasIzmers+")");
+        	double cena = picasCena(PicasIzmers, UzVietas, PicasPiedevas);
+        	PasutijumaCENA.setText("$"+cena);
+        	IDField.setText(ID+n+"");
+        });
+        
+        atiestatitPoga.addActionListener(e -> {
+        	picasNosaukums.setText("");
+        	PVards.setText("");
+        	adrese.setText("");
+        	talrunis.setText("");
+        	PasutijumaCENA.setText("");
+        	IDField.setText("");
+        	
+        	S.setSelected(false);
+        	M.setSelected(false);
+            XL.setSelected(false);
+            senes.setSelected(false);
+        	pepperoni.setSelected(false);
+            ananas.setSelected(false);
+            UzVietasNE.setSelected(false);
+            UzVietasJA.setSelected(false);
         	
         });
         
