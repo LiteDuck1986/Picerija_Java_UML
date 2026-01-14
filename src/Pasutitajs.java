@@ -27,6 +27,12 @@ public class Pasutitajs {
 				this.nosaukums = nosaukums;
 			}
 			
+			
+			public String izvadit() {
+				return "Pasūtitāja vārds: "+getVards()+
+						"\nPicas cena: "+getCena()+" EUR";
+			}
+			
 			//=============== GETTER METODES ==================
 			
 			public int getPLielums() {

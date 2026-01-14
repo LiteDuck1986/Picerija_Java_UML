@@ -10,8 +10,13 @@ import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
+
 
 
 public class Picerija {
@@ -27,6 +32,10 @@ public class Picerija {
 	
 	// JTextField
     static JTextField PasutijumaCENA, PVards, talrunis, adrese, IDField, picasNosaukums;
+    
+    static JTextArea ta;
+    
+    static JScrollPane sp;
     
     // JCheckBox
     static JCheckBox S, M, XL, senes, ananas, pepperoni, merce, UzVietasJA, UzVietasNE;
@@ -70,12 +79,16 @@ public class Picerija {
         
         JPanel RedigetPanel = new JPanel(null);
         RedigetPanel.setBackground(sarkansTums);
+       
+        JPanel PasutijumiPanel = new JPanel(null);
+        PasutijumiPanel.setBackground(sarkansTums);
         
 
         // ============= PANEĻU SAVIENOJUMS ==============
         galvenaisPanel.add(sakumsPanel, "sākums");
         galvenaisPanel.add(PasutijumaIzveidePanel, "pica");
         galvenaisPanel.add(RedigetPanel, "rediģēt");
+        galvenaisPanel.add(PasutijumiPanel, "pasutijumi");
         
      
         
@@ -105,7 +118,16 @@ public class Picerija {
         RedigetPasutijumuPoga.setFocusPainted(false);
         sakumsPanel.add(RedigetPasutijumuPoga);
         
+        JButton PasutijumiPoga = new JButton("Apskatīt pasūtījumus");
+        PasutijumiPoga.setBounds(10, 300, 160, 50);
+        PasutijumiPoga.setBackground(Color.RED);
+        PasutijumiPoga.setForeground(Color.WHITE);
+        PasutijumiPoga.setBorderPainted(true);
+        PasutijumiPoga.setFocusPainted(false);
+        sakumsPanel.add(PasutijumiPoga);
         
+        
+        // Paneļa pogas
         JButton PievienotPasutijumu = new JButton("Pievienot");
         PievienotPasutijumu.setBackground(Color.RED);
         PievienotPasutijumu.setForeground(Color.WHITE);
@@ -118,14 +140,14 @@ public class Picerija {
         AtjaunotPoga.setForeground(Color.WHITE);
         AtjaunotPoga.setBorderPainted(true);
         AtjaunotPoga.setFocusPainted(false);
-        AtjaunotPoga.setBounds(500, 550, 150, 30);
+        AtjaunotPoga.setBounds(550, 550, 150, 30);
         
         JButton atiestatitPoga = new JButton("Atiestatīt");
         atiestatitPoga.setBackground(Color.RED);
         atiestatitPoga.setForeground(Color.WHITE);
         atiestatitPoga.setBorderPainted(true);
         atiestatitPoga.setFocusPainted(false);
-        atiestatitPoga.setBounds(600, 550, 150, 30);
+        atiestatitPoga.setBounds(650, 550, 150, 30);
         
         // JTextFieldsss
         PasutijumaCENA = new JTextField("$0", 16);
@@ -269,6 +291,9 @@ public class Picerija {
         
         
         
+        
+        
+        
         // ActionListeners  =================================================================================================
         PievienotPasutijumu.addActionListener(e -> {
         	
@@ -340,6 +365,7 @@ public class Picerija {
         	sakumsPanel.add(PasutijumaPoga);
         	sakumsPanel.add(RedigetPasutijumuPoga);
         	sakumsPanel.add(SakumaPoga);
+        	sakumsPanel.add(PasutijumiPoga);
         	cardLayout.show(galvenaisPanel, "sākums");
         });
         
@@ -347,6 +373,7 @@ public class Picerija {
         	PasutijumaIzveidePanel.add(PasutijumaPoga);
         	PasutijumaIzveidePanel.add(RedigetPasutijumuPoga);
         	PasutijumaIzveidePanel.add(SakumaPoga);
+        	PasutijumaIzveidePanel.add(PasutijumiPoga);
         	cardLayout.show(galvenaisPanel, "pica");
         });
         
@@ -354,7 +381,39 @@ public class Picerija {
         	RedigetPanel.add(RedigetPasutijumuPoga);
         	RedigetPanel.add(PasutijumaPoga);
         	RedigetPanel.add(SakumaPoga);
+        	RedigetPanel.add(PasutijumiPoga);
         	cardLayout.show(galvenaisPanel, "rediģēt");
+        });
+        
+        PasutijumiPoga.addActionListener(e -> {
+        	PasutijumiPanel.add(RedigetPasutijumuPoga);
+        	PasutijumiPanel.add(PasutijumaPoga);
+        	PasutijumiPanel.add(SakumaPoga);
+        	PasutijumiPanel.add(PasutijumiPoga);
+        	
+        	
+        	String str = "";
+    		
+    		for (int i = 0; i < Pasutitaji.size(); i++) {
+    		str += ((Pasutitajs) (Pasutitaji.get(i))).izvadit()
+    				+"\n============================================\n";
+    		}
+    		
+    		ta = new JTextArea(str, 10, 20);
+    		ta.setBounds(200, 300, 400, 400);
+//    		ta.setVisible(false);
+    		ta.setEditable(false);
+    		sp = new JScrollPane(ta);
+    		sp.setVisible(true);
+    		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+    		JOptionPane.showMessageDialog(PasutijumiPanel, sp, "Aktīvie pasūtījumi", JOptionPane.PLAIN_MESSAGE);
+        	
+        	ta.setVisible(true);
+        	sp.setVisible(true);
+        	
+        	PasutijumiPanel.add(ta, sp);
+        	
+        	cardLayout.show(galvenaisPanel, "pasutijumi");
         });
         
         
