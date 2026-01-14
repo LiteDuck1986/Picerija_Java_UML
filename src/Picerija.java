@@ -26,13 +26,13 @@ public class Picerija {
 	static JPanel galvenaisPanel;
 	
 	// JTextField
-    static JTextField PasutijumaCENA, PVards, talrunis, adrese;
+    static JTextField PasutijumaCENA, PVards, talrunis, adrese, IDField, picasNosaukums;
     
     // JCheckBox
     static JCheckBox S, M, XL, senes, ananas, pepperoni, merce, UzVietasJA, UzVietasNE;
     
     // labels
-    static JLabel izmersLabel, piedevasLabel, UzVietasLabel;
+    static JLabel izmersLabel, piedevasLabel, UzVietasLabel, vardsLabel, nosaukumsLabel, adreseLabel, cenaLabel, talrunisLabel, IDLabel;
     
     
     
@@ -106,80 +106,110 @@ public class Picerija {
         
         
         JButton PievienotPasutijumu = new JButton("Pievienot");
-        PievienotPasutijumu.setBounds(300, 400, 160, 20);
+        PievienotPasutijumu.setBounds(400, 550, 150, 30);
         
         // JTextFieldsss
-        PasutijumaCENA = new JTextField("0", 16);
+        PasutijumaCENA = new JTextField("$0", 16);
         PasutijumaCENA.setBounds(400, 500, 160, 20);
         
         PVards = new JTextField("Jānis", 16);
         PVards.setBounds(400, 100, 160, 20);
         
         adrese = new JTextField("Liepāja, Ventpils iela 51, LV-6769", 16);
-        adrese.setBounds(300, 325, 160, 20);
+        adrese.setBounds(400, 200, 220, 20);
         
         talrunis = new JTextField("+371 23 676 676", 16);
-        talrunis.setBounds(300, 325, 160, 20);
+        talrunis.setBounds(400, 150, 160, 20);
+        
+        IDField = new JTextField("67", 16);
+        IDField.setBounds(400, 250, 160, 20);
+        
+        picasNosaukums = new JTextField("Pepperoni pica (15)", 16);
+        picasNosaukums.setBounds(400, 400, 160, 20);
         
         // JCheckBox (Picas izmērs)
         S = new JCheckBox("10");
-        S.setBounds(250, 275, 40, 20);
+        S.setBounds(400, 350, 40, 20);
         S.setForeground(Color.WHITE);
         S.setOpaque(false);
         
         M = new JCheckBox("15");
-        M.setBounds(300, 275, 40, 20);
+        M.setBounds(450, 350, 40, 20);
         M.setForeground(Color.WHITE);
         M.setOpaque(false);
         
         XL = new JCheckBox("20");
-        XL.setBounds(350, 275, 40, 20);
+        XL.setBounds(500, 350, 40, 20);
         XL.setForeground(Color.WHITE);
         XL.setOpaque(false);
         
         // Labels
         izmersLabel = new JLabel("Picas izmērs:");
-        izmersLabel.setBounds(250, 250, 160, 20);
+        izmersLabel.setBounds(400, 325, 160, 20);
         izmersLabel.setForeground(Color.WHITE);
+        
+        vardsLabel = new JLabel("Pasūtitāja vārds:");
+        vardsLabel.setBounds(400, 75, 160, 20);
+        vardsLabel.setForeground(Color.WHITE);
+        
+        cenaLabel = new JLabel("Picas cena:");
+        cenaLabel.setBounds(400, 475, 160, 20);
+        cenaLabel.setForeground(Color.WHITE);
+        
+        adreseLabel = new JLabel("Pasūtītāja adrese:");
+        adreseLabel.setBounds(400, 175, 160, 20);
+        adreseLabel.setForeground(Color.WHITE);
+        
+        talrunisLabel = new JLabel("Pasūtītāja talrunis:");
+        talrunisLabel.setBounds(400, 125, 160, 20);
+        talrunisLabel.setForeground(Color.WHITE);
+        
+        IDLabel = new JLabel("Pasūtījuma ID:");
+        IDLabel.setBounds(400, 225, 160, 20);
+        IDLabel.setForeground(Color.WHITE);
+        
+        nosaukumsLabel = new JLabel("Picas nosaukums:");
+        nosaukumsLabel.setBounds(400, 375, 160, 20);
+        nosaukumsLabel.setForeground(Color.WHITE);
         
         
         // Picas piedevas
         senes = new JCheckBox("Sēnes");
-        senes.setBounds(250, 150, 65, 20);
+        senes.setBounds(400, 300, 65, 20);
         senes.setForeground(Color.WHITE);
         senes.setOpaque(false);
         
         pepperoni = new JCheckBox("Pepperoni");
-        pepperoni.setBounds(315, 150, 90, 20);
+        pepperoni.setBounds(465, 300, 90, 20);
         pepperoni.setForeground(Color.WHITE);
         pepperoni.setOpaque(false);
         
         ananas = new JCheckBox("Ananāss");
-        ananas.setBounds(410, 150, 80, 20);
+        ananas.setBounds(560, 300, 80, 20);
         ananas.setForeground(Color.WHITE);
         ananas.setOpaque(false);
         
         // labels
         piedevasLabel = new JLabel("Picas piedevas:");
-        piedevasLabel.setBounds(250, 125, 160, 20);
+        piedevasLabel.setBounds(400, 275, 160, 20);
         piedevasLabel.setForeground(Color.WHITE);
         
         
         
         // Uz vietas check box
         UzVietasJA = new JCheckBox("Jā");
-        UzVietasJA.setBounds(250, 100, 65, 20);
+        UzVietasJA.setBounds(400, 450, 65, 20);
         UzVietasJA.setForeground(Color.WHITE);
         UzVietasJA.setOpaque(false);
         
         UzVietasNE = new JCheckBox("Nē");
-        UzVietasNE.setBounds(315, 100, 90, 20);
+        UzVietasNE.setBounds(465, 450, 90, 20);
         UzVietasNE.setForeground(Color.WHITE);
         UzVietasNE.setOpaque(false);
         
         // labels
         UzVietasLabel = new JLabel("Pasūtijumu savāks uz vietas?:");
-        UzVietasLabel.setBounds(250, 75, 160, 20);
+        UzVietasLabel.setBounds(400, 425, 160, 20);
         UzVietasLabel.setForeground(Color.WHITE);
         
         
@@ -199,6 +229,14 @@ public class Picerija {
         PasutijumaIzveidePanel.add(ananas);
         PasutijumaIzveidePanel.add(UzVietasJA);
         PasutijumaIzveidePanel.add(UzVietasNE);
+        PasutijumaIzveidePanel.add(vardsLabel);
+        PasutijumaIzveidePanel.add(cenaLabel);
+        PasutijumaIzveidePanel.add(adreseLabel);
+        PasutijumaIzveidePanel.add(talrunisLabel);
+        PasutijumaIzveidePanel.add(IDLabel);
+        PasutijumaIzveidePanel.add(IDField);
+        PasutijumaIzveidePanel.add(nosaukumsLabel);
+        PasutijumaIzveidePanel.add(picasNosaukums);
         
         frame.add(galvenaisPanel);
         frame.setVisible(true);
@@ -226,10 +264,14 @@ public class Picerija {
         	
         	String nosaukums = piedeva+" Pica ("+izmers+")";
         	
+        	String vards = PVards.getText();
+        	String Padrese = adrese.getText();
+        	String talr = talrunis.getText();
+        	
         	
         	double cena = picasCena(izmers, UzVietas, piedeva);
         	
-        	Pasutitajs pasutijums = new Pasutitajs(izmers, PasutijumaID, cena, uzVietas, "yes", "yes", "yes", piedeva, nosaukums);
+        	Pasutitajs pasutijums = new Pasutitajs(izmers, PasutijumaID, cena, uzVietas, vards, Padrese, talr, piedeva, nosaukums);
         	Pasutitaji.add(pasutijums);
         	
         	// Debug prints
@@ -243,7 +285,7 @@ public class Picerija {
         	
             izmersLabel.setText(PasutijumaCENA.getText());
 
-            PasutijumaCENA.setText(PasutijumaCENA.getText());
+            PasutijumaCENA.setText("$"+cena);
         	
         });
         
