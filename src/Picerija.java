@@ -1,10 +1,12 @@
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -13,9 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 
 
@@ -33,9 +38,6 @@ public class Picerija {
 	// JTextField
     static JTextField PasutijumaCENA, PVards, talrunis, adrese, IDField, picasNosaukums;
     
-    static JTextArea ta;
-    
-    static JScrollPane sp;
     
     // JCheckBox
     static JCheckBox S, M, XL, senes, ananas, pepperoni, merce, UzVietasJA, UzVietasNE;
@@ -94,37 +96,49 @@ public class Picerija {
         
         // Pogas izveide (SADAĻAS)
         JButton SakumaPoga = new JButton("Sākums");
+        SakumaPoga.setIcon(setIkona("/ikonas/sakums.png", 24));
         SakumaPoga.setBounds(10, 75, 160, 50);
         SakumaPoga.setBackground(Color.RED);
         SakumaPoga.setForeground(Color.WHITE);
-        SakumaPoga.setBorderPainted(true);
         SakumaPoga.setFocusPainted(false);
+        SakumaPoga.setHorizontalAlignment(SwingConstants.LEFT);
+        SakumaPoga.setIconTextGap(10);
         sakumsPanel.add(SakumaPoga);
+
         
-        JButton PasutijumaPoga = new JButton("Pievienot pasūtijumu");
+        JButton PasutijumaPoga = new JButton("Pievienot");
+        PasutijumaPoga.setIcon(setIkona("/ikonas/pievienot.png", 24));
         PasutijumaPoga.setBounds(10, 150, 160, 50);
         PasutijumaPoga.setBackground(Color.RED);
         PasutijumaPoga.setForeground(Color.WHITE);
-        PasutijumaPoga.setBorderPainted(true);
         PasutijumaPoga.setFocusPainted(false);
+        PasutijumaPoga.setHorizontalAlignment(SwingConstants.LEFT);
+        PasutijumaPoga.setIconTextGap(10);
         sakumsPanel.add(PasutijumaPoga);
+
         
         
-        JButton RedigetPasutijumuPoga = new JButton("Rediģēt pasūtijumus");
+        JButton RedigetPasutijumuPoga = new JButton("Rediģēt");
+        RedigetPasutijumuPoga.setIcon(setIkona("/ikonas/rediget.png", 24));
         RedigetPasutijumuPoga.setBounds(10, 225, 160, 50);
         RedigetPasutijumuPoga.setBackground(Color.RED);
         RedigetPasutijumuPoga.setForeground(Color.WHITE);
-        RedigetPasutijumuPoga.setBorderPainted(true);
         RedigetPasutijumuPoga.setFocusPainted(false);
+        RedigetPasutijumuPoga.setHorizontalAlignment(SwingConstants.LEFT);
+        RedigetPasutijumuPoga.setIconTextGap(10);
         sakumsPanel.add(RedigetPasutijumuPoga);
+
         
-        JButton PasutijumiPoga = new JButton("Apskatīt pasūtījumus");
+        JButton PasutijumiPoga = new JButton("Pasūtījumi");
+        PasutijumiPoga.setIcon(setIkona("/ikonas/pasutijumi.png", 24));
         PasutijumiPoga.setBounds(10, 300, 160, 50);
         PasutijumiPoga.setBackground(Color.RED);
         PasutijumiPoga.setForeground(Color.WHITE);
-        PasutijumiPoga.setBorderPainted(true);
         PasutijumiPoga.setFocusPainted(false);
+        PasutijumiPoga.setHorizontalAlignment(SwingConstants.LEFT);
+        PasutijumiPoga.setIconTextGap(10);
         sakumsPanel.add(PasutijumiPoga);
+
         
         
         // Paneļa pogas
@@ -289,8 +303,16 @@ public class Picerija {
         ArrayList<Pasutitajs> Pasutitaji = new ArrayList<>();
         
         
-        
-        
+        // JTable priekš pasūtijuma rediģēšanas.
+        String[] columns = { "ID", "Pasūtītājs", "Izmērs", "Cena", "Uz vietas", "Piedevas" };
+
+        DefaultTableModel DTableModelis = new DefaultTableModel(columns, 0);
+        JTable table = new JTable(DTableModelis);
+
+        JScrollPane scroll = new JScrollPane(table);
+        scroll.setBounds(180, 150, 600, 300);
+
+        RedigetPanel.add(scroll);
         
         
         
@@ -317,8 +339,18 @@ public class Picerija {
         	
         	double cena = picasCena(izmers, UzVietas, piedeva);
         	
+        	
         	Pasutitajs pasutijums = new Pasutitajs(izmers, PasutijumaID, cena, uzVietas, vards, Padrese, talr, piedeva, nosaukums);
         	Pasutitaji.add(pasutijums);
+        	
+        	DTableModelis.addRow(new Object[]{
+                    pasutijums.getPasutijumaID(),
+                    pasutijums.getVards(),
+                    pasutijums.getPLielums(),
+                    pasutijums.getCena(),
+                    pasutijums.getUzVietas(),
+                    pasutijums.getPiedevas()
+            });
         	
         	// Debug prints
             System.out.println("=====================================");
@@ -384,6 +416,33 @@ public class Picerija {
         	RedigetPanel.add(PasutijumiPoga);
         	cardLayout.show(galvenaisPanel, "rediģēt");
         });
+        
+        
+        DTableModelis.addTableModelListener(e -> {
+
+            int rinda = e.getFirstRow();
+            int kolonna = e.getColumn();
+
+            if (rinda < 0 || kolonna < 0) return;
+
+            Pasutitajs p = Pasutitaji.get(rinda);
+            Object value = DTableModelis.getValueAt(rinda, kolonna);
+
+          try {
+            switch (kolonna) {
+                case 1 -> p.setPLielums(Integer.parseInt(value.toString()));
+                case 2 -> p.setPasutitajaVards(value.toString());
+                case 3 -> p.setCena(Double.parseDouble(value.toString()));
+                case 4 -> p.setUzVietas(value.toString().equalsIgnoreCase("true"));
+                case 5 -> p.setPiedevas(value.toString());
+            }
+          } catch (Exception ex) {
+              System.out.println("Nepareizi rediģēti dati!");
+          }
+        });
+
+
+        
         
         PasutijumiPoga.addActionListener(e -> {
   	
@@ -531,13 +590,13 @@ public class Picerija {
 			
 		
 		// piedevas cena
-		if (piedeva == "Sēnes")
+		if (piedeva.equals("Sēnes"))
 			PicasCena += 1.80;
 		
-		if (piedeva == "Pepperoni")
+		if (piedeva.equals("Pepperoni"))
 			PicasCena += 2.50;
 		
-		if (piedeva == "Ananāss")
+		if (piedeva.equals("Ananāss"))
 			PicasCena += 2.00;
 		
 		
@@ -551,5 +610,16 @@ public class Picerija {
 			
 		return PicasCena;
 	}
+	
+	// metode kas seto ikonas
+	private static ImageIcon setIkona(String cels, int izmers) {
+	    ImageIcon ikona = new ImageIcon(
+	        Picerija.class.getResource(cels)
+	    );
+	    Image img = ikona.getImage().getScaledInstance(izmers, izmers, Image.SCALE_SMOOTH);
+	    return new ImageIcon(img);
+	}
+
+	
 
 }
