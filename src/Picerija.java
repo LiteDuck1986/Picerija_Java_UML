@@ -386,12 +386,7 @@ public class Picerija {
         });
         
         PasutijumiPoga.addActionListener(e -> {
-        	PasutijumiPanel.add(RedigetPasutijumuPoga);
-        	PasutijumiPanel.add(PasutijumaPoga);
-        	PasutijumiPanel.add(SakumaPoga);
-        	PasutijumiPanel.add(PasutijumiPoga);
-        	
-        	
+  	
         	String str = "";
     		
     		for (int i = 0; i < Pasutitaji.size(); i++) {
@@ -399,19 +394,32 @@ public class Picerija {
     				+"\n============================================\n";
     		}
     		
-    		ta = new JTextArea(str, 10, 20);
-    		ta.setBounds(200, 300, 400, 400);
-//    		ta.setVisible(false);
+    		// Text area
+    		JTextArea ta = new JTextArea(str.toString());
     		ta.setEditable(false);
-    		sp = new JScrollPane(ta);
-    		sp.setVisible(true);
+    		ta.setLineWrap(true);
+    		ta.setWrapStyleWord(true);
+    		
+    		// Scroll pane
+    		JScrollPane sp = new JScrollPane(ta);
+    		sp.setBounds(350, 100, 400, 400);
     		sp.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-    		JOptionPane.showMessageDialog(PasutijumiPanel, sp, "Aktīvie pasūtījumi", JOptionPane.PLAIN_MESSAGE);
         	
         	ta.setVisible(true);
         	sp.setVisible(true);
         	
-        	PasutijumiPanel.add(ta, sp);
+        	// Noņem veco UI
+        	PasutijumiPanel.removeAll();
+        	
+        	PasutijumiPanel.add(RedigetPasutijumuPoga);
+        	PasutijumiPanel.add(PasutijumaPoga);
+        	PasutijumiPanel.add(SakumaPoga);
+        	PasutijumiPanel.add(PasutijumiPoga);
+        	PasutijumiPanel.add(sp);
+        	
+        	// Refresho paneli
+        	PasutijumiPanel.revalidate();
+        	PasutijumiPanel.repaint();
         	
         	cardLayout.show(galvenaisPanel, "pasutijumi");
         });
