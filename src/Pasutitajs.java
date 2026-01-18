@@ -7,19 +7,20 @@ public class Pasutitajs {
 	// 		================ ATRIBŪTI ================
 	
 			private String PasutitajaVards, adrese, talrunis, piedevas, nosaukums;
-			private boolean UzVietas;
+			private boolean UzVietas, statuss;
 			private double cena;
 			private int PLielums, PasutijumaID;
 			
 			
 			// ========== KONSTRUKTORS ==========
 			
-			public Pasutitajs(int PLielums, int PasutijumaID, double cena, boolean UzVietas, String PasutitajaVards, String adrese, String talrunis,
+			public Pasutitajs(int PLielums, int PasutijumaID, double cena, boolean UzVietas, boolean statuss, String PasutitajaVards, String adrese, String talrunis,
 					String piedevas, String nosaukums) {
 				this.PLielums = PLielums;
 				this.PasutijumaID = PasutijumaID;
 				this.cena = cena;
 				this.UzVietas = UzVietas;
+				this.statuss = statuss;
 				this.PasutitajaVards = PasutitajaVards;
 				this.adrese = adrese;
 				this.talrunis = talrunis;
@@ -30,7 +31,8 @@ public class Pasutitajs {
 			
 			public String izvadit() {
 				return "Pasūtitāja vārds: "+getVards()+
-						"\nPicas cena: "+getCena()+" EUR";
+						"\nPicas cena: "+getCena()+" €"
+						+ "\nStatuss: " + (statuss ? "Pabeigts" : "Aktīvs");
 			}
 			
 			//=============== GETTER METODES ==================
@@ -49,6 +51,10 @@ public class Pasutitajs {
 			
 			public boolean getUzVietas() {
 				return UzVietas;
+			}
+			
+			public boolean getStatuss() {
+				return statuss;
 			}
 			
 			public String getVards() {
@@ -89,6 +95,10 @@ public class Pasutitajs {
 			
 			public void setUzVietas(boolean UzVietas) {
 				this.UzVietas = UzVietas;
+			}
+			
+			public void setStatuss(boolean statuss) {
+				this.statuss = statuss;
 			}
 			
 			public void setPasutitajaVards(String PasutitajaVards) {
