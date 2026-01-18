@@ -20,6 +20,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -40,6 +42,9 @@ public class Picerija {
     
     // JTextArea
     static JTextArea aktivsArea, pabeigtsArea;
+    
+    //JScrollPanel
+    static JScrollPane aktivieScroll, pabeigtieScroll;
     
     // JCheckBox
     static JCheckBox S, M, XL, senes, ananas, pepperoni, merce, UzVietasJA, UzVietasNE;
@@ -62,7 +67,10 @@ public class Picerija {
 	
 	
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
+		
+		// UIManager nozagu no Gustāvs Lācis 2PT, lai mana programma izskatītos skaistāka!
+		UIManager.setLookAndFeel("javax.swing.plaf.nimbus.NimbusLookAndFeel");
 
 		frame = new JFrame("Picerijas pasūtijuma programma");
         frame.setSize(1000, 800);
@@ -185,6 +193,20 @@ public class Picerija {
         pabeigtPoga.setFocusPainted(false);
         pabeigtPoga.setBounds(550, 600, 200, 30);
         
+        // Pasūtijumi paneļa pogas
+        JButton saglabatPoga = new JButton("Saglabāt failā");
+        saglabatPoga.setBackground(Color.RED);
+        saglabatPoga.setForeground(Color.WHITE);
+        saglabatPoga.setBorderPainted(true);
+        saglabatPoga.setFocusPainted(false);
+        saglabatPoga.setBounds(550, 550, 200, 30);
+        
+        JButton nolasitPoga = new JButton("nolasīt no faila");
+        nolasitPoga.setBackground(Color.RED);
+        nolasitPoga.setForeground(Color.WHITE);
+        nolasitPoga.setBorderPainted(true);
+        nolasitPoga.setFocusPainted(false);
+        nolasitPoga.setBounds(625, 550, 200, 30);
         
         // JTextFieldsss
         PasutijumaCENA = new JTextField("$0", 16);
@@ -275,12 +297,12 @@ public class Picerija {
         
         
         // Uz vietas check box
-        UzVietasJA = new JCheckBox("Jā");
+        UzVietasJA = new JCheckBox("Uz vietas");
         UzVietasJA.setBounds(400, 450, 65, 20);
         UzVietasJA.setForeground(Color.WHITE);
         UzVietasJA.setOpaque(false);
         
-        UzVietasNE = new JCheckBox("Nē");
+        UzVietasNE = new JCheckBox("Līdz ņemšanai");
         UzVietasNE.setBounds(465, 450, 90, 20);
         UzVietasNE.setForeground(Color.WHITE);
         UzVietasNE.setOpaque(false);
@@ -289,6 +311,21 @@ public class Picerija {
         UzVietasLabel = new JLabel("Pasūtijumu savāks uz vietas?:");
         UzVietasLabel.setBounds(400, 425, 160, 20);
         UzVietasLabel.setForeground(Color.WHITE);
+        
+        
+        aktivsArea = new JTextArea();
+    	aktivsArea.setEditable(false);
+    	aktivsArea.setLineWrap(true);
+
+        pabeigtsArea = new JTextArea();
+        pabeigtsArea.setEditable(false);
+        pabeigtsArea.setLineWrap(true);
+
+        aktivieScroll = new JScrollPane(aktivsArea);
+        aktivieScroll.setBounds(300, 100, 350, 300);
+
+        pabeigtieScroll = new JScrollPane(pabeigtsArea);
+        pabeigtieScroll.setBounds(700, 100, 350, 300);
         
         
         PasutijumaIzveidePanel.add(PasutijumaCENA);
@@ -483,7 +520,7 @@ public class Picerija {
          // Noņem izveleto rindu no JTable
             DTableModelis.removeRow(izveletaRinda);
             
-         // Update text
+         // Atjauno tekstu
             AtjaunoTextArea();
 
             JOptionPane.showMessageDialog(null, "Pasūtījums pabeigts!");
@@ -511,21 +548,6 @@ public class Picerija {
         
         
         PasutijumiPoga.addActionListener(e -> {
-  	
-        	aktivsArea = new JTextArea();
-        	aktivsArea.setEditable(false);
-        	aktivsArea.setLineWrap(true);
-
-            pabeigtsArea = new JTextArea();
-            pabeigtsArea.setEditable(false);
-            pabeigtsArea.setLineWrap(true);
-
-            JScrollPane aktivieScroll = new JScrollPane(aktivsArea);
-            aktivieScroll.setBounds(300, 100, 350, 300);
-
-            JScrollPane pabeigtieScroll = new JScrollPane(pabeigtsArea);
-            pabeigtieScroll.setBounds(700, 100, 350, 300);
-        	
         	
         	// Noņem veco UI
         	PasutijumiPanel.removeAll();
@@ -536,6 +558,8 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumaPoga);
         	PasutijumiPanel.add(SakumaPoga);
         	PasutijumiPanel.add(PasutijumiPoga);
+        	PasutijumiPanel.add(saglabatPoga);
+        	PasutijumiPanel.add(nolasitPoga);
         	
         	AtjaunoTextArea();
         	
@@ -544,6 +568,63 @@ public class Picerija {
         	PasutijumiPanel.repaint();
         	
         	cardLayout.show(galvenaisPanel, "pasutijumi");
+        });
+        
+        saglabatPoga.addActionListener(e -> {
+        	
+        	PasutijumiFails.saglabaPasutijumus(Pasutitaji, pabeigtiePasutijumi);
+        	PasutijumiPanel.removeAll();
+        	
+        	PasutijumiPanel.add(aktivieScroll);
+            PasutijumiPanel.add(pabeigtieScroll);
+        	PasutijumiPanel.add(RedigetPasutijumuPoga);
+        	PasutijumiPanel.add(PasutijumaPoga);
+        	PasutijumiPanel.add(SakumaPoga);
+        	PasutijumiPanel.add(PasutijumiPoga);
+        	PasutijumiPanel.add(saglabatPoga);
+        	PasutijumiPanel.add(nolasitPoga);
+        	
+        	AtjaunoTextArea();
+        	PasutijumiPanel.revalidate();
+        	PasutijumiPanel.repaint();
+        });
+        
+        nolasitPoga.addActionListener(e -> {
+        	
+        	Pasutitaji.clear();
+            pabeigtiePasutijumi.clear();
+        	
+        	PasutijumiFails.nolasaPasutijumus(Pasutitaji, pabeigtiePasutijumi);
+        	
+        	// Iztīra visu JTable
+        	DTableModelis.setRowCount(0);  // iztīra visas rindas
+
+        	// pievieno visus aktīvos pasūtījumus
+        	for (Pasutitajs pasutijums : Pasutitaji) {
+        	    DTableModelis.addRow(new Object[]{
+        	        pasutijums.getPasutijumaID(),
+        	        pasutijums.getVards(),
+        	        pasutijums.getPLielums(),
+        	        pasutijums.getCena(),
+        	        pasutijums.getUzVietas(),
+        	        pasutijums.getPiedevas()
+        	    });
+        	}
+        	
+        	PasutijumiPanel.removeAll();
+        	
+        	PasutijumiPanel.add(aktivieScroll);
+            PasutijumiPanel.add(pabeigtieScroll);
+        	PasutijumiPanel.add(RedigetPasutijumuPoga);
+        	PasutijumiPanel.add(PasutijumaPoga);
+        	PasutijumiPanel.add(SakumaPoga);
+        	PasutijumiPanel.add(PasutijumiPoga);
+        	PasutijumiPanel.add(saglabatPoga);
+        	PasutijumiPanel.add(nolasitPoga);
+        	
+        	AtjaunoTextArea();
+        	PasutijumiPanel.revalidate();
+        	PasutijumiPanel.repaint();
         });
         
         
@@ -684,6 +765,10 @@ public class Picerija {
 	}
 
 	public static void AtjaunoTextArea() {
+		
+		// Iztīra visus TextArea
+		aktivsArea.setText("");
+		pabeigtsArea.setText("");
 
 	    StringBuilder aktivs = new StringBuilder();
 	    StringBuilder pabeigts = new StringBuilder();
