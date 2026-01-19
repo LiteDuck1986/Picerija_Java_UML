@@ -74,7 +74,6 @@ public class Picerija {
     public final static Color sarkansTums = new Color(160, 5, 0);
     public final static Color sadalasFonaKrasa = new Color(120, 10, 0);
 	
-	
 
 	public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException, UnsupportedLookAndFeelException {
 		
@@ -189,26 +188,26 @@ public class Picerija {
         
         
         // Paneļa pogas
-        JButton PievienotPasutijumu = new JButton("Pievienot");
+        JButton PievienotPasutijumu = new JButton("Pievienot pasūtījumu");
         PievienotPasutijumu.setBackground(Color.RED);
         PievienotPasutijumu.setForeground(Color.WHITE);
         PievienotPasutijumu.setBorderPainted(true);
         PievienotPasutijumu.setFocusPainted(false);
-        PievienotPasutijumu.setBounds(300, 550, 125, 30);
+        PievienotPasutijumu.setBounds(300, 550, 175, 30);
         
         JButton AtjaunotPoga = new JButton("Atjaunot");
         AtjaunotPoga.setBackground(Color.RED);
         AtjaunotPoga.setForeground(Color.WHITE);
         AtjaunotPoga.setBorderPainted(true);
         AtjaunotPoga.setFocusPainted(false);
-        AtjaunotPoga.setBounds(450, 550, 125, 30);
+        AtjaunotPoga.setBounds(500, 550, 125, 30);
         
         JButton atiestatitPoga = new JButton("Atiestatīt");
         atiestatitPoga.setBackground(Color.RED);
         atiestatitPoga.setForeground(Color.WHITE);
         atiestatitPoga.setBorderPainted(true);
         atiestatitPoga.setFocusPainted(false);
-        atiestatitPoga.setBounds(600, 550, 135, 30);
+        atiestatitPoga.setBounds(650, 550, 135, 30);
         
         // Rediģēt pasūtījumu paneļa pogas
         JButton dzestPoga = new JButton("Dzēst");
@@ -239,6 +238,25 @@ public class Picerija {
         nolasitPoga.setBorderPainted(true);
         nolasitPoga.setFocusPainted(false);
         nolasitPoga.setBounds(580, 615, 170, 30);
+        
+        // Bildes
+        ImageIcon protips = new ImageIcon(
+                Picerija.class.getResource("/bildes/protips.png")
+        );
+        Image bilde = protips.getImage().getScaledInstance(280, 140, Image.SCALE_SMOOTH);
+        JLabel bildeLabel1 = new JLabel(new ImageIcon(bilde));
+        bildeLabel1.setBounds(460, 400, 650, 360);
+        sakumsPanel.add(bildeLabel1);
+        
+        
+        ImageIcon rokasgramata = new ImageIcon(
+                Picerija.class.getResource("/bildes/manuals.png")
+        );
+        Image bilde2 = rokasgramata.getImage().getScaledInstance(280, 140, Image.SCALE_SMOOTH);
+        JLabel bildeLabel2 = new JLabel(new ImageIcon(bilde2));
+        bildeLabel2.setBounds(100, 440, 650, 360);
+        sakumsPanel.add(bildeLabel2);
+        
         
         // JTextFieldsss
         PasutijumaCENA = new JTextField("0.00€", 16);
@@ -425,6 +443,12 @@ public class Picerija {
         redigetLabel.setFont(new Font("Arial", Font.BOLD, 20));
         redigetLabel.setForeground(Color.WHITE);
         
+        JLabel rokasgramataLabel = new JLabel("Darbinieka rokasgrāmata");
+        rokasgramataLabel.setBounds(430, 50, 250, 20);
+        rokasgramataLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        rokasgramataLabel.setForeground(Color.WHITE);
+        sakumsPanel.add(rokasgramataLabel);
+        
         
         aktivsArea = new JTextArea();
     	aktivsArea.setEditable(false);
@@ -439,6 +463,38 @@ public class Picerija {
 
         pabeigtieScroll = new JScrollPane(pabeigtsArea);
         pabeigtieScroll.setBounds(600, 100, 350, 500);
+        
+        // JTextArea darbinieka rokasgrāmata
+        JTextArea rokasgramataArea = new JTextArea();
+        rokasgramataArea.setEditable(false);
+        rokasgramataArea.setLineWrap(true);
+        rokasgramataArea.setWrapStyleWord(true);
+        rokasgramataArea.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+
+        rokasgramataArea.setText("""
+        PICĒRIJAS SISTĒMAS DARBINIEKA ROKASGRĀMATA
+
+        1. Jauna pasūtījuma izveide:
+        - Ievadi klienta informāciju
+        - Izvēlies picu
+        - Izvēlies uzkodu
+        - Izvēlies dzērienu
+        - Nospied 'Pievienot pasūtījumu'
+
+        2. Pasūtījuma pabeigšana:
+        - Izvēlies pasūtījumu
+        - Nospied 'Pabeigt pasūtījumu'
+
+        3. Noteikumi:
+        - Visi lauki ir jāaizpilda!
+        - Cena tiek aprēķināta automātiski!
+        - Saglabāt pasūtījuma vēstures!
+        """);
+
+        JScrollPane rokasgramatasScroll = new JScrollPane(rokasgramataArea);
+        rokasgramatasScroll.setBounds(300, 80, 500, 400);
+        sakumsPanel.add(rokasgramatasScroll);
+
         
         
         PasutijumaIzveidePanel.add(PasutijumaCENA);
