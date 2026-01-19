@@ -62,6 +62,9 @@ Programmas darbības plūsma.
 ### Pasūtījuma izveide
 ![Pasūtījuma izveide](docs/izveidot.png)
 
+### Pasūtījumu rediģēšana
+![Rediģēsana](docs/rediget.png)
+
 ### Pasūtījumu saraksts
 ![Pasūtījumi](docs/pasutijumi.png)
 
