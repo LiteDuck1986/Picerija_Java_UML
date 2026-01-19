@@ -6,7 +6,7 @@ public class Pasutitajs {
 
 	// 		================ ATRIBŪTI ================
 	
-			private String PasutitajaVards, adrese, talrunis, piedevas, nosaukums;
+			private String PasutitajaVards, adrese, talrunis, piedevas, nosaukums, merce, uzkoda, dzeriens;
 			private boolean UzVietas, statuss;
 			private double cena;
 			private int PLielums, PasutijumaID;
@@ -15,7 +15,7 @@ public class Pasutitajs {
 			// ========== KONSTRUKTORS ==========
 			
 			public Pasutitajs(int PLielums, int PasutijumaID, double cena, boolean UzVietas, boolean statuss, String PasutitajaVards, String adrese, String talrunis,
-					String piedevas, String nosaukums) {
+					String piedevas, String nosaukums, String merce, String uzkoda, String dzeriens) {
 				this.PLielums = PLielums;
 				this.PasutijumaID = PasutijumaID;
 				this.cena = cena;
@@ -26,13 +26,26 @@ public class Pasutitajs {
 				this.talrunis = talrunis;
 				this.piedevas = piedevas;
 				this.nosaukums = nosaukums;
+				this.merce = merce;
+				this.uzkoda = uzkoda;
+				this.dzeriens = dzeriens;
 			}
 			
 			
 			public String izvadit() {
-				return "Pasūtitāja vārds: "+getVards()+
-						"\nPicas cena: "+getCena()+" €"
-						+ "\nStatuss: " + (statuss ? "Pabeigts" : "Aktīvs");
+				return "Pasūtījuma ID: "+getPasutijumaID()
+						+"\nPicas izmērs: "+getPLielums()+"cm"
+						+"\nPicas piedeva: "+getPiedevas()
+						+"\nPicas mērce: "+getMerce()
+						+"\nUzkoda: "+getUzkoda()
+						+"\nDzēriens: "+getDzeriens()
+						+"\nUz vietas: "+getUzVietas()
+						+"\nPicas cena: "+getCena()+" €"
+						+"\nPicas nosaukums: "+getNosaukums()
+						+"\nPasūtītāja vārds: "+getVards()
+						+"\nPasūtītāja adrese: "+getAdrese()
+						+"\nPasūtītāja talrunis: "+getTalrunis()
+						+"\nStatuss: " + (statuss ? "Pabeigts" : "Aktīvs");
 			}
 			
 			//=============== GETTER METODES ==================
@@ -71,6 +84,18 @@ public class Pasutitajs {
 			
 			public String getPiedevas() {
 				return piedevas;
+			}
+			
+			public String getMerce() {
+				return merce;
+			}
+			
+			public String getUzkoda() {
+				return uzkoda;
+			}
+			
+			public String getDzeriens() {
+				return dzeriens;
 			}
 			
 			public String getNosaukums() {
@@ -115,6 +140,18 @@ public class Pasutitajs {
 			
 			public void setPiedevas(String piedevas) {
 				this.piedevas = piedevas;
+			}
+			
+			public void setMerce(String merce) {
+				this.merce = merce;
+			}
+			
+			public void setUzkoda(String uzkoda) {
+				this.uzkoda = uzkoda;
+			}
+			
+			public void setDzeriens(String dzeriens) {
+				this.dzeriens = dzeriens;
 			}
 			
 			public void setNosaukums(String nosaukums) {
