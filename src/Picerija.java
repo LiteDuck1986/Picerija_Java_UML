@@ -1,5 +1,6 @@
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -71,6 +72,7 @@ public class Picerija {
     
     // Krāsas izveide priekš programmas fona
     public final static Color sarkansTums = new Color(160, 5, 0);
+    public final static Color sadalasFonaKrasa = new Color(120, 10, 0);
 	
 	
 
@@ -104,14 +106,17 @@ public class Picerija {
         JPanel PasutijumiPanel = new JPanel(null);
         PasutijumiPanel.setBackground(sarkansTums);
         
+        JPanel IzietPanel = new JPanel(null);
+        IzietPanel.setBackground(sarkansTums);
+        
 
         // ============= PANEĻU SAVIENOJUMS ==============
         galvenaisPanel.add(sakumsPanel, "sākums");
         galvenaisPanel.add(PasutijumaIzveidePanel, "pica");
         galvenaisPanel.add(RedigetPanel, "rediģēt");
         galvenaisPanel.add(PasutijumiPanel, "pasutijumi");
+        galvenaisPanel.add(IzietPanel, "iziet");
         
-     
         
         // Pogas izveide (SADAĻAS)
         JButton SakumaPoga = new JButton("Sākums");
@@ -161,7 +166,26 @@ public class Picerija {
         PasutijumiPoga.setHorizontalAlignment(SwingConstants.LEFT);
         PasutijumiPoga.setIconTextGap(10);
         sakumsPanel.add(PasutijumiPoga);
+        
+        
+        JButton IzietPoga = new JButton("Iziet");
+        IzietPoga.setIcon(setIkona("/ikonas/logout.png", 24));
+        IzietPoga.setBounds(10, 375, 160, 50);
+        IzietPoga.setBackground(Color.RED);
+        IzietPoga.setForeground(Color.WHITE);
+        IzietPoga.setFocusPainted(false);
+        IzietPoga.setBorderPainted(false);
+        IzietPoga.setHorizontalAlignment(SwingConstants.LEFT);
+        IzietPoga.setIconTextGap(10);
+        sakumsPanel.add(IzietPoga);
 
+        // Sadaļas fons
+        JPanel FonaPoga = new JPanel();
+        FonaPoga.setBounds(4, 50, 174, 390);
+        FonaPoga.setBackground(sadalasFonaKrasa);
+        FonaPoga.setForeground(sadalasFonaKrasa);
+        FonaPoga.setOpaque(true);
+        sakumsPanel.add(FonaPoga);
         
         
         // Paneļa pogas
@@ -192,14 +216,14 @@ public class Picerija {
         dzestPoga.setForeground(Color.WHITE);
         dzestPoga.setBorderPainted(true);
         dzestPoga.setFocusPainted(false);
-        dzestPoga.setBounds(475, 600, 150, 30);
+        dzestPoga.setBounds(580, 615, 100, 30);
         
         JButton pabeigtPoga = new JButton("Pabeigt pasūtījumu");
         pabeigtPoga.setBackground(Color.RED);
         pabeigtPoga.setForeground(Color.WHITE);
         pabeigtPoga.setBorderPainted(true);
         pabeigtPoga.setFocusPainted(false);
-        pabeigtPoga.setBounds(550, 600, 200, 30);
+        pabeigtPoga.setBounds(370, 615, 170, 30);
         
         // Pasūtijumi paneļa pogas
         JButton saglabatPoga = new JButton("Saglabāt failā");
@@ -207,14 +231,14 @@ public class Picerija {
         saglabatPoga.setForeground(Color.WHITE);
         saglabatPoga.setBorderPainted(true);
         saglabatPoga.setFocusPainted(false);
-        saglabatPoga.setBounds(550, 550, 200, 30);
+        saglabatPoga.setBounds(420, 615, 150, 30);
         
-        JButton nolasitPoga = new JButton("nolasīt no faila");
+        JButton nolasitPoga = new JButton("Ielādēt no faila");
         nolasitPoga.setBackground(Color.RED);
         nolasitPoga.setForeground(Color.WHITE);
         nolasitPoga.setBorderPainted(true);
         nolasitPoga.setFocusPainted(false);
-        nolasitPoga.setBounds(625, 550, 200, 30);
+        nolasitPoga.setBounds(580, 615, 170, 30);
         
         // JTextFieldsss
         PasutijumaCENA = new JTextField("0.00€", 16);
@@ -348,17 +372,17 @@ public class Picerija {
         
         
         // Dzērieni CheckBox
-        kola = new JCheckBox("Kola -0.5L");
+        kola = new JCheckBox("Kola - 0.5L");
         kola.setBounds(600, 300, 100, 20);
         kola.setForeground(Color.WHITE);
         kola.setOpaque(false);
         
-        sprite = new JCheckBox("Sprite -0.5L");
+        sprite = new JCheckBox("Sprite - 0.5L");
         sprite.setBounds(700, 300, 100, 20);
         sprite.setForeground(Color.WHITE);
         sprite.setOpaque(false);
         
-        udens = new JCheckBox("Ūdens -0.5L");
+        udens = new JCheckBox("Ūdens - 0.5L");
         udens.setBounds(800, 300, 100, 20);
         udens.setForeground(Color.WHITE);
         udens.setOpaque(false);
@@ -385,6 +409,22 @@ public class Picerija {
         UzVietasLabel.setBounds(300, 320, 160, 20);
         UzVietasLabel.setForeground(Color.WHITE);
         
+        // lokālie labeļi
+        JLabel aktivsLabel = new JLabel("Aktīvie pasūtījumi");
+        aktivsLabel.setBounds(290, 50, 250, 20);
+        aktivsLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        aktivsLabel.setForeground(Color.WHITE);
+        
+        JLabel pabeigtsLabel = new JLabel("Pabeigtie pasūtījumi");
+        pabeigtsLabel.setBounds(690, 50, 250, 20);
+        pabeigtsLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        pabeigtsLabel.setForeground(Color.WHITE);
+        
+        JLabel redigetLabel = new JLabel("Rediģēt pasūtījumus");
+        redigetLabel.setBounds(465, 50, 250, 20);
+        redigetLabel.setFont(new Font("Arial", Font.BOLD, 20));
+        redigetLabel.setForeground(Color.WHITE);
+        
         
         aktivsArea = new JTextArea();
     	aktivsArea.setEditable(false);
@@ -395,10 +435,10 @@ public class Picerija {
         pabeigtsArea.setLineWrap(true);
 
         aktivieScroll = new JScrollPane(aktivsArea);
-        aktivieScroll.setBounds(300, 100, 350, 300);
+        aktivieScroll.setBounds(200, 100, 350, 500);
 
         pabeigtieScroll = new JScrollPane(pabeigtsArea);
-        pabeigtieScroll.setBounds(700, 100, 350, 300);
+        pabeigtieScroll.setBounds(600, 100, 350, 500);
         
         
         PasutijumaIzveidePanel.add(PasutijumaCENA);
@@ -443,7 +483,13 @@ public class Picerija {
         frame.add(galvenaisPanel);
         frame.setVisible(true);
         
-        
+        // Fons
+        JPanel FonsIzveideP = new JPanel();
+        FonsIzveideP.setBounds(280, 60, 630, 560);
+        FonsIzveideP.setBackground(sadalasFonaKrasa);
+        FonsIzveideP.setForeground(sadalasFonaKrasa);
+        FonsIzveideP.setOpaque(true);
+        PasutijumaIzveidePanel.add(FonsIzveideP);
         
         // JTable priekš pasūtijuma rediģēšanas.
         String[] columns = { "ID", "Pasūtītājs", "Izmērs", "Cena", "Uz vietas", "Piedevas" };
@@ -452,11 +498,12 @@ public class Picerija {
         JTable table = new JTable(DTableModelis);
 
         JScrollPane scroll = new JScrollPane(table);
-        scroll.setBounds(180, 150, 600, 300);
+        scroll.setBounds(200, 100, 760, 500);
 
         RedigetPanel.add(scroll);
         RedigetPanel.add(pabeigtPoga);
         RedigetPanel.add(dzestPoga);
+        RedigetPanel.add(redigetLabel);
         
         
         
@@ -479,28 +526,28 @@ public class Picerija {
         	
         	// Pārbaudes
         	if (!vards.matches("^[A-Za-zĀ-ž]+$")) {
-                JOptionPane.showMessageDialog(null, "Ievadi vārdu!");
+                JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Ievadi vārdu!");
                 return;
             }
 
             if (Padrese.isEmpty()) {
-                JOptionPane.showMessageDialog(null, "Ievadi adresi!");
+                JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Ievadi adresi!");
                 return;
             }
 
             if (!talr.matches("^\\+371 \\d{2} \\d{3} \\d{3}$")) {
-                JOptionPane.showMessageDialog(null, "Tālruņa formāts nav pareizs!\nPiemērs: +371 22 064 856");
+                JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Tālruņa formāts nav pareizs!\nPiemērs: +371 22 064 856");
                 return;
             }
 
             if (!S.isSelected() && !M.isSelected() && !XL.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Izvēlies picas izmēru!");
+                JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Izvēlies picas izmēru!");
                 return;
             }
 
 
             if (!UzVietasJA.isSelected() && !UzVietasNE.isSelected()) {
-                JOptionPane.showMessageDialog(null, "Izvēlies vai uz vietas vai piegāde!");
+                JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Izvēlies vai uz vietas vai piegāde!");
                 return;
             }
         	
@@ -512,7 +559,9 @@ public class Picerija {
         	boolean uzVietas = UzVietas;
         	String piedeva = PicasPiedevas;
         	String nosaukums = piedeva+" Pica ("+izmers+")";
-        	double cena = picasCena(izmers, UzVietas, piedeva, nosaukums, nosaukums, nosaukums);
+        	double cena = picasCena(izmers, uzVietas, piedeva, merce, uzkoda, dzeriens);
+        	cena = Math.round(cena * 100.0) / 100.0; // Apaļo uz 2 decimaliem
+        	System.out.println("Cena: "+cena+"€");
         	
         	Pasutitajs pasutijums = new Pasutitajs(izmers, PasutijumaID, cena, uzVietas, false, vards, Padrese, talr, piedeva,
         			nosaukums, merce, uzkoda, dzeriens);
@@ -526,20 +575,10 @@ public class Picerija {
                     pasutijums.getUzVietas(),
                     pasutijums.getPiedevas()
             });
-        	
-        	// Debug prints
-            System.out.println("=====================================");
-            System.out.println("        Pasūtijuma čeks\n");
-            System.out.println("Pasūtijuma numurs: " + PasutijumaID);
-            System.out.println("Picas izmērs: " + izmers);
-            System.out.println("Picas saņem uz vietas?: " + uzVietas);
-            System.out.println("Picas kopēja cena: " + cena+"€");
-            System.out.println("\n=====================================\n\n\n");
-        	
 
             PasutijumaCENA.setText(String.format("%.2f €", cena));
             
-            JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Ir izveidots jauns pasūtījums ar "+PasutijumaID+" pasūtījuma ID!", "Brīdinājums",
+            JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Izveidots jauns pasūtījums ar ID: "+PasutijumaID+", priekš "+vards+"!", "Paziņojums",
 					JOptionPane.WARNING_MESSAGE);
         	
         });
@@ -587,6 +626,8 @@ public class Picerija {
         	sakumsPanel.add(RedigetPasutijumuPoga);
         	sakumsPanel.add(SakumaPoga);
         	sakumsPanel.add(PasutijumiPoga);
+        	sakumsPanel.add(IzietPoga);
+        	sakumsPanel.add(FonaPoga);
         	cardLayout.show(galvenaisPanel, "sākums");
         });
         
@@ -595,6 +636,8 @@ public class Picerija {
         	PasutijumaIzveidePanel.add(RedigetPasutijumuPoga);
         	PasutijumaIzveidePanel.add(SakumaPoga);
         	PasutijumaIzveidePanel.add(PasutijumiPoga);
+        	PasutijumaIzveidePanel.add(IzietPoga);
+        	PasutijumaIzveidePanel.add(FonaPoga);
         	cardLayout.show(galvenaisPanel, "pica");
         });
         
@@ -603,7 +646,34 @@ public class Picerija {
         	RedigetPanel.add(PasutijumaPoga);
         	RedigetPanel.add(SakumaPoga);
         	RedigetPanel.add(PasutijumiPoga);
+        	RedigetPanel.add(IzietPoga);
+        	RedigetPanel.add(FonaPoga);
         	cardLayout.show(galvenaisPanel, "rediģēt");
+        });
+        
+        IzietPoga.addActionListener(e -> {
+        	IzietPanel.add(RedigetPasutijumuPoga);
+        	IzietPanel.add(PasutijumaPoga);
+        	IzietPanel.add(SakumaPoga);
+        	IzietPanel.add(PasutijumiPoga);
+        	IzietPanel.add(IzietPoga);
+        	IzietPanel.add(FonaPoga);
+        	cardLayout.show(galvenaisPanel, "iziet");
+        	
+        	int atbilde = JOptionPane.showConfirmDialog(IzietPanel, "Vai jūs vēlaties iziet no sistēmas?",
+        	        "Apstiprinājums", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        	
+        	if (atbilde == JOptionPane.YES_OPTION) {
+        	    System.exit(0);  // programma beidzas
+        	} 
+        	
+        	sakumsPanel.add(PasutijumaPoga);
+        	sakumsPanel.add(RedigetPasutijumuPoga);
+        	sakumsPanel.add(SakumaPoga);
+        	sakumsPanel.add(PasutijumiPoga);
+        	sakumsPanel.add(IzietPoga);
+        	sakumsPanel.add(FonaPoga);
+        	cardLayout.show(galvenaisPanel, "sākums");
         });
         
         DTableModelis.addTableModelListener(e -> {
@@ -634,7 +704,7 @@ public class Picerija {
             int izveletaRinda = table.getSelectedRow();
 
             if (izveletaRinda == -1) {
-                JOptionPane.showMessageDialog(null, "Izvēlies pasūtījumu!");
+                JOptionPane.showMessageDialog(RedigetPanel, "Izvēlies pasūtījumu!");
                 return;
             }
 
@@ -651,7 +721,7 @@ public class Picerija {
          // Atjauno tekstu
             AtjaunoTextArea();
 
-            JOptionPane.showMessageDialog(null, "Pasūtījums pabeigts!");
+            JOptionPane.showMessageDialog(RedigetPanel, "Izvēlētais pasūtījums ir pabeigts!");
         });
         
         dzestPoga.addActionListener(e -> {
@@ -659,7 +729,7 @@ public class Picerija {
             int izveletaRinda = table.getSelectedRow();
 
             if (izveletaRinda == -1) {
-                JOptionPane.showMessageDialog(null, "Izvēlies pasūtījumu!");
+                JOptionPane.showMessageDialog(RedigetPanel, "Izvēlies pasūtījumu!");
                 return;
             }
 
@@ -670,7 +740,7 @@ public class Picerija {
             DTableModelis.removeRow(izveletaRinda);
             
 
-            JOptionPane.showMessageDialog(null, "Pasūtījums dzēsts!");
+            JOptionPane.showMessageDialog(RedigetPanel, "Izvēlētais pasūtījums dzēsts!");
         });
 
         
@@ -688,6 +758,10 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumiPoga);
         	PasutijumiPanel.add(saglabatPoga);
         	PasutijumiPanel.add(nolasitPoga);
+        	PasutijumiPanel.add(IzietPoga);
+        	PasutijumiPanel.add(aktivsLabel);
+        	PasutijumiPanel.add(pabeigtsLabel);
+        	PasutijumiPanel.add(FonaPoga);
         	
         	AtjaunoTextArea();
         	
@@ -711,6 +785,7 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumiPoga);
         	PasutijumiPanel.add(saglabatPoga);
         	PasutijumiPanel.add(nolasitPoga);
+        	PasutijumiPanel.add(FonaPoga);
         	
         	AtjaunoTextArea();
         	PasutijumiPanel.revalidate();
@@ -749,6 +824,7 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumiPoga);
         	PasutijumiPanel.add(saglabatPoga);
         	PasutijumiPanel.add(nolasitPoga);
+        	PasutijumiPanel.add(FonaPoga);
         	
         	AtjaunoTextArea();
         	PasutijumiPanel.revalidate();
