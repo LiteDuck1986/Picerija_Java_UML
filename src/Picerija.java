@@ -29,8 +29,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class Picerija {
 	
-	static String ievade;
-	
 	public static Pasutitajs pasutitajs = null;
 	
 	static Random rand = new Random();
@@ -442,6 +440,12 @@ public class Picerija {
         redigetLabel.setBounds(465, 50, 250, 20);
         redigetLabel.setFont(new Font("Arial", Font.BOLD, 20));
         redigetLabel.setForeground(Color.WHITE);
+        
+        JLabel PIzveideLabels = new JLabel("Izveidot pasūtījumu");
+        PIzveideLabels.setBounds(500, 30, 250, 20);
+        PIzveideLabels.setFont(new Font("Arial", Font.BOLD, 20));
+        PIzveideLabels.setForeground(Color.WHITE);
+        PasutijumaIzveidePanel.add(PIzveideLabels);
         
         JLabel rokasgramataLabel = new JLabel("Darbinieka rokasgrāmata");
         rokasgramataLabel.setBounds(430, 50, 250, 20);
