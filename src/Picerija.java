@@ -548,7 +548,7 @@ public class Picerija {
         PasutijumaIzveidePanel.add(FonsIzveideP);
         
         // JTable priekš pasūtijuma rediģēšanas.
-        String[] columns = { "ID", "Pasūtītājs", "Izmērs", "Cena", "Uz vietas", "Piedevas" };
+        String[] columns = { "ID", "Pasūtītājs", "Izmērs", "Piedevas", "Mērce", "Uzkoda", "Dzēriens", "Uz vietas", "Cena"};
 
         DefaultTableModel DTableModelis = new DefaultTableModel(columns, 0);
         JTable table = new JTable(DTableModelis);
@@ -624,12 +624,15 @@ public class Picerija {
         	Pasutitaji.add(pasutijums);
         	
         	DTableModelis.addRow(new Object[]{
-                    pasutijums.getPasutijumaID(),
-                    pasutijums.getVards(),
-                    pasutijums.getPLielums(),
-                    pasutijums.getCena(),
-                    pasutijums.getUzVietas(),
-                    pasutijums.getPiedevas()
+        			pasutijums.getPasutijumaID(),
+        	        pasutijums.getVards(),
+        	        pasutijums.getPLielums(),
+        	        pasutijums.getPiedevas(),
+        	        pasutijums.getMerce(),
+        	        pasutijums.getUzkoda(),
+        	        pasutijums.getDzeriens(),
+        	        pasutijums.getUzVietas(),
+        	        pasutijums.getCena()
             });
 
             PasutijumaCENA.setText(String.format("%.2f €", cena));
@@ -744,11 +747,14 @@ public class Picerija {
 
           try {
             switch (kolonna) {
-                case 1 -> p.setPLielums(Integer.parseInt(value.toString()));
-                case 2 -> p.setPasutitajaVards(value.toString());
-                case 3 -> p.setCena(Double.parseDouble(value.toString()));
-                case 4 -> p.setUzVietas(Boolean.parseBoolean(value.toString()));
-                case 5 -> p.setPiedevas(value.toString());
+                case 1 -> p.setPasutitajaVards(value.toString());
+                case 2 -> p.setPLielums(Integer.parseInt(value.toString()));
+                case 3 -> p.setPiedevas(value.toString());
+                case 4 -> p.setMerce(value.toString());
+                case 5 -> p.setUzkoda(value.toString());
+                case 6 -> p.setDzeriens(value.toString());
+                case 7 -> p.setUzVietas(Boolean.parseBoolean(value.toString()));
+                case 8 -> p.setCena(Double.parseDouble(value.toString()));
             }
           } catch (Exception ex) {
               System.out.println("Nepareizi rediģēti dati!");
@@ -814,10 +820,11 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumiPoga);
         	PasutijumiPanel.add(saglabatPoga);
         	PasutijumiPanel.add(nolasitPoga);
-        	PasutijumiPanel.add(IzietPoga);
         	PasutijumiPanel.add(aktivsLabel);
         	PasutijumiPanel.add(pabeigtsLabel);
+        	PasutijumiPanel.add(IzietPoga);
         	PasutijumiPanel.add(FonaPoga);
+        	
         	
         	AtjaunoTextArea();
         	
@@ -841,7 +848,11 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumiPoga);
         	PasutijumiPanel.add(saglabatPoga);
         	PasutijumiPanel.add(nolasitPoga);
+        	PasutijumiPanel.add(IzietPoga);
         	PasutijumiPanel.add(FonaPoga);
+        	PasutijumiPanel.add(aktivsLabel);
+        	PasutijumiPanel.add(pabeigtsLabel);
+        	
         	
         	AtjaunoTextArea();
         	PasutijumiPanel.revalidate();
@@ -864,9 +875,12 @@ public class Picerija {
         	        pasutijums.getPasutijumaID(),
         	        pasutijums.getVards(),
         	        pasutijums.getPLielums(),
-        	        pasutijums.getCena(),
+        	        pasutijums.getPiedevas(),
+        	        pasutijums.getMerce(),
+        	        pasutijums.getUzkoda(),
+        	        pasutijums.getDzeriens(),
         	        pasutijums.getUzVietas(),
-        	        pasutijums.getPiedevas()
+        	        pasutijums.getCena()
         	    });
         	}
         	
@@ -880,7 +894,10 @@ public class Picerija {
         	PasutijumiPanel.add(PasutijumiPoga);
         	PasutijumiPanel.add(saglabatPoga);
         	PasutijumiPanel.add(nolasitPoga);
+        	PasutijumiPanel.add(IzietPoga);
         	PasutijumiPanel.add(FonaPoga);
+        	PasutijumiPanel.add(aktivsLabel);
+        	PasutijumiPanel.add(pabeigtsLabel);
         	
         	AtjaunoTextArea();
         	PasutijumiPanel.revalidate();
