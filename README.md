@@ -54,6 +54,15 @@ Programmas darbības plūsma.
 
 ---
 
+### Vecās diagrammas
+Vecās UML diagrammas.
+
+![Activity Diagram](docs/ActivityDiagramma_picerija_veca.jpg)
+![Class Diagram](docs/ClassDiagram_picerija_veca.jpg)
+![UseCase Diagram](docs/UseCase_Diagramma_veca.jpg)
+
+---
+
 ## Programmas screenshots
 
 ### Sākuma logs
