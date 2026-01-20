@@ -59,7 +59,7 @@ public class Picerija {
     static ArrayList<Pasutitajs> pabeigtiePasutijumi = new ArrayList<>();
     
     // picas static mainīgie ko izmantoja priekš pasūtijuma izveides
-    static int PicasIzmers = 10;
+    static int PicasIzmers = 0;
     static String PicasPiedevas = "";
     static String PicasMerce = "";
     static String dzerieni = "";
