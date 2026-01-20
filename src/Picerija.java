@@ -272,22 +272,22 @@ public class Picerija {
         IDField = new JTextField(""+ID);
         IDField.setBounds(300, 280, 220, 30);
         
-        picasNosaukums = new JTextField("Pepperoni pica (15)", 16);
+        picasNosaukums = new JTextField("", 16);
         picasNosaukums.setBounds(600, 350, 220, 30);
         
         // JCheckBox (Picas izmērs)
-        S = new JCheckBox("10");
-        S.setBounds(600, 100, 40, 20);
+        S = new JCheckBox("10 /+3.50€");
+        S.setBounds(600, 100, 80, 20);
         S.setForeground(Color.WHITE);
         S.setOpaque(false);
         
-        M = new JCheckBox("15");
-        M.setBounds(650, 100, 40, 20);
+        M = new JCheckBox("15 /+5.50€");
+        M.setBounds(690, 100, 80, 20);
         M.setForeground(Color.WHITE);
         M.setOpaque(false);
         
-        XL = new JCheckBox("20");
-        XL.setBounds(700, 100, 40, 20);
+        XL = new JCheckBox("20 /+7€");
+        XL.setBounds(780, 100, 80, 20);
         XL.setForeground(Color.WHITE);
         XL.setOpaque(false);
         
@@ -322,18 +322,18 @@ public class Picerija {
         
         
         // Picas piedevas
-        senes = new JCheckBox("Sēnes");
-        senes.setBounds(600, 150, 65, 20);
+        senes = new JCheckBox("Sēnes /+1.80€");
+        senes.setBounds(600, 150, 107, 20);
         senes.setForeground(Color.WHITE);
         senes.setOpaque(false);
         
-        pepperoni = new JCheckBox("Pepperoni");
-        pepperoni.setBounds(668, 150, 90, 20);
+        pepperoni = new JCheckBox("Pepperoni /+2.50€");
+        pepperoni.setBounds(710, 150, 126, 20);
         pepperoni.setForeground(Color.WHITE);
         pepperoni.setOpaque(false);
         
-        ananas = new JCheckBox("Ananāss");
-        ananas.setBounds(760, 150, 80, 20);
+        ananas = new JCheckBox("Ananāss /+2€");
+        ananas.setBounds(840, 150, 120, 20);
         ananas.setForeground(Color.WHITE);
         ananas.setOpaque(false);
         
@@ -344,18 +344,18 @@ public class Picerija {
         
         
         // picas Mērces
-        sinepes = new JCheckBox("Sinepes");
-        sinepes.setBounds(600, 200, 77, 20);
+        sinepes = new JCheckBox("Sinepes /+2.60€");
+        sinepes.setBounds(600, 200, 116, 20);
         sinepes.setForeground(Color.WHITE);
         sinepes.setOpaque(false);
         
-        kecups = new JCheckBox("Kečups");
-        kecups.setBounds(675, 200, 66, 20);
+        kecups = new JCheckBox("Kečups /+1.60€");
+        kecups.setBounds(720, 200, 115, 20);
         kecups.setForeground(Color.WHITE);
         kecups.setOpaque(false);
         
-        majoneze = new JCheckBox("Majonēze");
-        majoneze.setBounds(750, 200, 85, 20);
+        majoneze = new JCheckBox("Majonēze /+1.30€");
+        majoneze.setBounds(832, 200, 120, 20);
         majoneze.setForeground(Color.WHITE);
         majoneze.setOpaque(false);
         
@@ -366,18 +366,18 @@ public class Picerija {
         
         
         // uzkodas CheckBox
-        nageti = new JCheckBox("Nageti");
-        nageti.setBounds(600, 250, 70, 20);
+        nageti = new JCheckBox("Nageti /+3.20€");
+        nageti.setBounds(600, 250, 107, 20);
         nageti.setForeground(Color.WHITE);
         nageti.setOpaque(false);
         
-        cipsi = new JCheckBox("Čipši");
-        cipsi.setBounds(670, 250, 60, 20);
+        cipsi = new JCheckBox("Čipši /+2€");
+        cipsi.setBounds(716, 250, 100, 20);
         cipsi.setForeground(Color.WHITE);
         cipsi.setOpaque(false);
         
-        Mmaize = new JCheckBox("Mini maize");
-        Mmaize.setBounds(735, 250, 100, 20);
+        Mmaize = new JCheckBox("Mini maize /+1€");
+        Mmaize.setBounds(815, 250, 117, 20);
         Mmaize.setForeground(Color.WHITE);
         Mmaize.setOpaque(false);
         
@@ -388,18 +388,18 @@ public class Picerija {
         
         
         // Dzērieni CheckBox
-        kola = new JCheckBox("Kola - 0.5L");
-        kola.setBounds(600, 300, 100, 20);
+        kola = new JCheckBox("Kola - 0.5L /+1.8€");
+        kola.setBounds(600, 300, 123, 20);
         kola.setForeground(Color.WHITE);
         kola.setOpaque(false);
         
-        sprite = new JCheckBox("Sprite - 0.5L");
-        sprite.setBounds(700, 300, 100, 20);
+        sprite = new JCheckBox("Sprite - 0.5L /+1.8€");
+        sprite.setBounds(720, 300, 130, 20);
         sprite.setForeground(Color.WHITE);
         sprite.setOpaque(false);
         
-        udens = new JCheckBox("Ūdens - 0.5L");
-        udens.setBounds(800, 300, 100, 20);
+        udens = new JCheckBox("Ūdens - 0.5L /+0.8€");
+        udens.setBounds(850, 300, 135, 20);
         udens.setForeground(Color.WHITE);
         udens.setOpaque(false);
         
@@ -415,8 +415,8 @@ public class Picerija {
         UzVietasJA.setForeground(Color.WHITE);
         UzVietasJA.setOpaque(false);
         
-        UzVietasNE = new JCheckBox("Piegāde");
-        UzVietasNE.setBounds(380, 345, 70, 20);
+        UzVietasNE = new JCheckBox("Piegāde +3€");
+        UzVietasNE.setBounds(380, 345, 100, 20);
         UzVietasNE.setForeground(Color.WHITE);
         UzVietasNE.setOpaque(false);
         
@@ -545,7 +545,7 @@ public class Picerija {
         
         // Fons
         JPanel FonsIzveideP = new JPanel();
-        FonsIzveideP.setBounds(280, 60, 630, 560);
+        FonsIzveideP.setBounds(280, 60, 685, 560);
         FonsIzveideP.setBackground(sadalasFonaKrasa);
         FonsIzveideP.setForeground(sadalasFonaKrasa);
         FonsIzveideP.setOpaque(true);
@@ -589,16 +589,20 @@ public class Picerija {
                 JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Ievadi vārdu!");
                 return;
             }
-
+        	
+        	// Adresi un talruni vajag tikai ja nav uz vietas
+        	if (UzVietasNE.isSelected()) {
             if (Padrese.isEmpty()) {
                 JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Ievadi adresi!");
                 return;
             }
-
+            
             if (!talr.matches("^\\+371 \\d{2} \\d{3} \\d{3}$")) {
                 JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Tālruņa formāts nav pareizs!\nPiemērs: +371 22 064 856");
                 return;
             }
+            
+        	}
 
             if (!S.isSelected() && !M.isSelected() && !XL.isSelected()) {
                 JOptionPane.showMessageDialog(PasutijumaIzveidePanel, "Izvēlies picas izmēru!");
@@ -932,7 +936,8 @@ public class Picerija {
 
             // Ja lietotājs visu ir uncheckojis tad Picas izmērs būs 10 (Viss mazākais)
             if (!S.isSelected() && !M.isSelected() && !XL.isSelected()) {
-            	PicasIzmers = 10;
+            	PicasIzmers = 0;
+            	
             }
             
             
@@ -1086,6 +1091,9 @@ public class Picerija {
 		
 		if (izmers == 20)
 			PicasCena += 7.00;
+		
+		if (izmers == 0)
+			PicasCena += 0.00;
 			
 		
 		// piedevas cena
@@ -1149,7 +1157,7 @@ public class Picerija {
 			PicasCena += 0.00;
 				
 		if (!uzVietas)
-			PicasCena += 3.20;
+			PicasCena += 3.00;
 				
 			
 		return PicasCena;
